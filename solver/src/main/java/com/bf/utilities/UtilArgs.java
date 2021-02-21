@@ -9,25 +9,25 @@ public class UtilArgs {
     private static List<String> optsList = new ArrayList<String>();
 
     public static List<String> getArgsList() {
-		return argsList;
-	}
+        return argsList;
+    }
 
-	public static void setArgsList(List<String> argsList) {
-		UtilArgs.argsList = argsList;
-	}
+    public static void setArgsList(List<String> argsList) {
+        UtilArgs.argsList = argsList;
+    }
 
-	public static List<String> getOptsList() {
-		return optsList;
-	}
+    public static List<String> getOptsList() {
+        return optsList;
+    }
 
-	public static void setOptsList(List<String> optsList) {
-		UtilArgs.optsList = optsList;
-	}
+    public static void setOptsList(List<String> optsList) {
+        UtilArgs.optsList = optsList;
+    }
 
-	/**
-     * Permet de gérer les arguments passés lors de l'appel du programme
-     * 
-     * @param args
+    /**
+     * Parse and stores the parameters
+     * Does the necessary prints
+     * @param args args of main
      */
     public static void parseArgs(String[] args) {
 
@@ -43,41 +43,37 @@ public class UtilArgs {
                             throw new IllegalArgumentException("Not a valid argument: " + args[i]);
                         } else if (args[0].charAt(0) == '-' && args[0].charAt(1) == '-') {
                             // --opt
-                            parseDoubleArgs(args);
+                            /*
+                             * The method used to parse --args has been removed to gain exec time 
+                             * In the same spirit, using switch is faster than using else if
+                             */
+                            if (args[i].length() < 3)
+                                throw new IllegalArgumentException("Not a valid argument: " + args[i]);
+                            switch (args[i]) {
+                                case "--formats":
+                                    System.out.println("[tgf,apx]");
+                                    break;
+                                case "--problems":
+                                    /**
+                                     * SE-Cat : the ranking with respect to the Categoriser Semantic
+                                     */
+                                    System.out.println("[SE-Cat]");
+                                    break;
+                                default:
+                                    throw new IllegalArgumentException("Unknown argument: " + args[i]);
+                            }
                         } else {
+                            // -opt goes with an arg
                             if (args.length - 1 == i || args[i + 1].charAt(0) == '-')
                                 throw new IllegalArgumentException("Expected arg after: " + args[i]);
-                            // -opt
                             optsList.add(args[i]);
                         }
                         break;
                     default:
                         // arg
                         argsList.add(args[i]);
-                    break;
+                        break;
                 }
-            }
-        }
-    }
-
-    /**
-     * Permet de gérer les arguments spéciaux (- -$)
-     * @see parseArgs
-     * @param args
-     */
-    public static void parseDoubleArgs( String [] args ) {
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].length() < 3)
-                throw new IllegalArgumentException("Not a valid argument: "+args[i]);
-            switch (args[i]) {
-                case "--formats":
-                    System.out.println("[tgf,apx]");
-                    break;
-                case "--problems":
-                    System.out.println("[SE-Cat]");
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown argument: "+args[i]);
             }
         }
     }

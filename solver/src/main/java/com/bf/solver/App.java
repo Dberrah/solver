@@ -14,8 +14,9 @@ public class App
                 if(UtilArgs.getOptsList().get(i) == "-p"){
                     switch (UtilArgs.getArgsList().get(i)) {
                         case "SE-Cat":
-                            Categoriser AF = new Categoriser(UtilAF.parseRankingAF());
+                            Categoriser<Integer> AF = new Categoriser<Integer>(UtilAF.parseRankingAF());
                             AF.resolve();
+                        	//System.out.println("Hello !");
                             break;
                         default:
                             break;

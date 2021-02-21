@@ -17,16 +17,32 @@ public class UtilAF {
 	public static Map<Integer, String> getIdToName() {
 		return idToName;
 	}
-
-	public static void setIdToName(HashMap<Integer, String> idToName) {
+	
+	public static Map<String, Integer> getNameToId() {
+		return nameToId;
+	}
+	
+	public static void setNameToId(Map<String, Integer> nameToId) {
+		UtilAF.nameToId = nameToId;
+	}
+	
+	public static void setIdToName(Map<Integer, String> idToName) {
 		UtilAF.idToName = idToName;
 	}
 
-	public static List<ArrayList<Boolean>> parseRankingAF() {
+	/**
+	 * Read and parse the file given as parameter
+	 * Only used when the graph is not weighted
+	 * @return AF : List<ArrayList<Integer>>
+	 */
+	public static List<ArrayList<Integer>> parseRankingAF() {
 		String fileName = null;
 		String fileExtension = null;
-		ArrayList<ArrayList<Boolean>> AF = new ArrayList<ArrayList<Boolean>>();
+		ArrayList<ArrayList<Integer>> AF = new ArrayList<ArrayList<Integer>>();
 		
+		/*
+		 * Can be done when reading the options by adding variables
+		 */
 		for (int i = 0; i < UtilArgs.getOptsList().size(); i++) {
 			if(UtilArgs.getOptsList().get(i) == "-f"){
 				fileName = UtilArgs.getArgsList().get(i);
@@ -42,26 +58,41 @@ public class UtilAF {
 			throw new IllegalArgumentException("Expected arg -fo");
 		}
 		try {
+
 			FileReader fReader = new FileReader(fileName);
+			// Use of a BufferedReader might add exec time
 			BufferedReader bReader = new BufferedReader(fReader);
 			String line = null;
+
 			switch (fileExtension) {
 				case "tgf":
 					int i=0;
 					Boolean isNode = true;
 				try {
 					while ((line = bReader.readLine()) != null) {
-						if(line == "#") isNode = false;
+						if(line == "#") isNode = false; // # is the separator between nodes and edges
 						if(isNode){
 							idToName.put(i, line);
 							nameToId.put(line, i);
-							i++;
+							AF.add(new ArrayList<Integer>());
+				            i++;
+							// Init of AF node by node
+				            for (int k = AF.size()-1; k >= 0; k--) {
+				                if(k==AF.size()-1){
+				                    for (int l = k; l >= 0; l--) {
+				                        AF.get(k).add(0);
+				                    }
+				                } else {
+				                    AF.get(k).add(0);
+				                }
+				            }
 						} else {
+							// Parsing using regex
 							String node1 = line.split(" ")[0];
 							String node2 = line.split(" ")[1];
 							int id1 = nameToId.get(node1);
 							int id2 = nameToId.get(node2);
-							AF.get(id1).set(id2, true);
+							AF.get(id1).set(id2, 1);
 						}
 					}
 				} catch (IOException e2) {
@@ -78,16 +109,26 @@ public class UtilAF {
 					int j=0;
 				try {
 					while ((line = bReader.readLine()) != null) {
-						if(line.startsWith("arg")) {
+						if(line.startsWith("arg")) { // Indicates that it is a node
 							idToName.put(j, line);
 							nameToId.put(line, j);
-							j++;
+							AF.add(new ArrayList<Integer>());
+				            j++;
+				            for (int k = AF.size()-1; k >= 0; k--) {
+				                if(k==AF.size()-1){
+				                    for (int l = k; l >= 0; l--) {
+				                        AF.get(k).add(0);
+				                    }
+				                } else {
+				                    AF.get(k).add(0);
+				                }
+				            }
 						} else {
 							String node1 = line.split("\\(|\\)|,")[0];
 							String node2 = line.split("\\(|\\)|,")[1];
 							int id1 = nameToId.get(node1);
 							int id2 = nameToId.get(node2);
-							AF.get(id1).set(id2, true);
+							AF.get(id1).set(id2, 1);
 						}
 					}
 				} catch (IOException e1) {
@@ -113,7 +154,9 @@ public class UtilAF {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
+	
 }
