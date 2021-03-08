@@ -7,16 +7,14 @@ public class App
 {
     public static void main( String[] args )
     {
-    	
     	UtilArgs.parseArgs(args);
     	if(!UtilArgs.getOptsList().isEmpty()){
             for (int i = 0; i < UtilArgs.getOptsList().size(); i++) {
-                if(UtilArgs.getOptsList().get(i) == "-p"){
+                if(UtilArgs.getOptsList().get(i).contentEquals("-p")){
                     switch (UtilArgs.getArgsList().get(i)) {
                         case "SE-Cat":
                             Categoriser<Integer> AF = new Categoriser<Integer>(UtilAF.parseRankingAF());
                             AF.resolve();
-                        	//System.out.println("Hello !");
                             break;
                         default:
                             break;

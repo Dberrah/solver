@@ -44,10 +44,10 @@ public class UtilAF {
 		 * Can be done when reading the options by adding variables
 		 */
 		for (int i = 0; i < UtilArgs.getOptsList().size(); i++) {
-			if(UtilArgs.getOptsList().get(i) == "-f"){
+			if(UtilArgs.getOptsList().get(i).contentEquals("-f")){
 				fileName = UtilArgs.getArgsList().get(i);
 			}
-			if(UtilArgs.getOptsList().get(i) == "-fo"){
+			if(UtilArgs.getOptsList().get(i).contentEquals("-fo")){
 				fileExtension = UtilArgs.getArgsList().get(i);
 			}
 		}
@@ -72,18 +72,19 @@ public class UtilAF {
 					while ((line = bReader.readLine()) != null) {
 						if(line == "#") isNode = false; // # is the separator between nodes and edges
 						if(isNode){
-							idToName.put(i, line);
-							nameToId.put(line, i);
+							String name1 = line.split(" ")[0];
+							idToName.put(i, name1);
+							nameToId.put(name1, i);
 							AF.add(new ArrayList<Integer>());
 				            i++;
 							// Init of AF node by node
 				            for (int k = AF.size()-1; k >= 0; k--) {
 				                if(k==AF.size()-1){
 				                    for (int l = k; l >= 0; l--) {
-				                        AF.get(k).add(0);
+				                        AF.get(k).add(null);
 				                    }
 				                } else {
-				                    AF.get(k).add(0);
+				                    AF.get(k).add(null);
 				                }
 				            }
 						} else {
@@ -110,22 +111,23 @@ public class UtilAF {
 				try {
 					while ((line = bReader.readLine()) != null) {
 						if(line.startsWith("arg")) { // Indicates that it is a node
-							idToName.put(j, line);
-							nameToId.put(line, j);
+							String name1 = line.split("\\(|\\)|,")[1];
+							idToName.put(j, name1);
+							nameToId.put(name1, j);
 							AF.add(new ArrayList<Integer>());
 				            j++;
 				            for (int k = AF.size()-1; k >= 0; k--) {
 				                if(k==AF.size()-1){
 				                    for (int l = k; l >= 0; l--) {
-				                        AF.get(k).add(0);
+				                        AF.get(k).add(null);
 				                    }
 				                } else {
-				                    AF.get(k).add(0);
+				                    AF.get(k).add(null);
 				                }
 				            }
 						} else {
-							String node1 = line.split("\\(|\\)|,")[0];
-							String node2 = line.split("\\(|\\)|,")[1];
+							String node1 = line.split("\\(|\\)|,")[1];
+							String node2 = line.split("\\(|\\)|,")[2];
 							int id1 = nameToId.get(node1);
 							int id2 = nameToId.get(node2);
 							AF.get(id1).set(id2, 1);
@@ -154,9 +156,7 @@ public class UtilAF {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-
-		return null;
+		return AF;
 	}
-
 	
 }

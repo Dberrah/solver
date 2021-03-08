@@ -1,9 +1,12 @@
 package com.bf.semantics;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Categoriser<N> extends AbstractSemantic<N> {
 
@@ -35,23 +38,16 @@ public class Categoriser<N> extends AbstractSemantic<N> {
     }
 
     public void sort() {
-        // First sort the id by values in an ArrayList
-        List<Integer> sortedIdList = new ArrayList<Integer>();
-        for (Integer id : values.keySet()) {
-            if(sortedIdList.isEmpty()){
-                sortedIdList.add(id);
-            } else {
-                for (int i = 0; i < sortedIdList.size(); i++) {
-                    if (values.get(id)<values.get(sortedIdList.get(i))) {
-                        sortedIdList.add(i, id);
-                    }
-                }
-            }
-        }
+    	// First sort the id by values in an ArrayList
+        Map<Integer, Double> sorted = 
+                values.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(Collectors.toMap(
+                        Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         // Use the ArrayList to fill the ranking List
         getRanking().add(new ArrayList<Integer>());
         int j=0;
-        for (Integer index : sortedIdList) {
+        for (Integer index : sorted.keySet()) {
             if (getRanking().get(j).isEmpty()) {
                 getRanking().get(j).add(index);
             } else {
@@ -74,7 +70,7 @@ public class Categoriser<N> extends AbstractSemantic<N> {
             }
         }
         this.sort();
-        System.out.println(this.toString());
+        System.out.print(this.toString());
     }
 
 }
