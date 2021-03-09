@@ -51,7 +51,7 @@ public class Categoriser<N> extends AbstractSemantic<N> {
             if (getRanking().get(j).isEmpty()) {
                 getRanking().get(j).add(index);
             } else {
-                if(values.get(getRanking().get(j).get(0)) == values.get(index)){
+                if(values.get(getRanking().get(j).get(0)).compareTo(values.get(index)) == 0){
                     getRanking().get(j).add(index);
                 } else {
                     getRanking().add(new ArrayList<Integer>());

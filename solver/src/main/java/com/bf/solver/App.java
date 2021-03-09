@@ -13,8 +13,8 @@ public class App
                 if(UtilArgs.getOptsList().get(i).contentEquals("-p")){
                     switch (UtilArgs.getArgsList().get(i)) {
                         case "SE-Cat":
-                            Categoriser<Integer> AF = new Categoriser<Integer>(UtilAF.parseRankingAF());
-                            AF.resolve();
+                            Categoriser<Integer> cat = new Categoriser<Integer>(UtilAF.parseRankingAF());
+                            cat.resolve();
                             break;
                         default:
                             break;

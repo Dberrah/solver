@@ -70,7 +70,7 @@ public class UtilAF {
 					Boolean isNode = true;
 				try {
 					while ((line = bReader.readLine()) != null) {
-						if(line == "#") isNode = false; // # is the separator between nodes and edges
+						if(line.contentEquals("#")) isNode = false; // # is the separator between nodes and edges
 						if(isNode){
 							String name1 = line.split(" ")[0];
 							idToName.put(i, name1);
@@ -87,7 +87,7 @@ public class UtilAF {
 				                    AF.get(k).add(null);
 				                }
 				            }
-						} else {
+						} else if(!line.contentEquals("#")){
 							// Parsing using regex
 							String node1 = line.split(" ")[0];
 							String node2 = line.split(" ")[1];
