@@ -1,6 +1,7 @@
 package com.bf.solver;
 
 import com.bf.semantics.Categoriser;
+import com.bf.semantics.CycleCategoriser;
 import com.bf.utilities.*;
 
 public class App 
@@ -16,7 +17,12 @@ public class App
                             Categoriser<Integer> cat = new Categoriser<Integer>(UtilAF.parseRankingAF());
                             cat.resolve();
                             break;
+                        case "R-CCat":
+                            CycleCategoriser<Integer> cCat = new CycleCategoriser<>(UtilAF.parseRankingAF());
+                            cCat.resolve();
+                            break;
                         default:
+                            System.err.println("There is no such problem !");
                             break;
                     }
                 }
