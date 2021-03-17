@@ -75,15 +75,24 @@ public class DiscussionBased<N> extends AbstractSemantic<N> {
 	
 	@Override
 	public void resolve() {
+		int tmpMax = 0;
+		Double max;
 		for (int i = 0; i < getAF().size(); i++) {
+			int size;
 			discussionCount.add(new ArrayList<Integer>());
-			discussionCount.get(i).add(getAttacker(i).size());
+			size = getAttacker(i).size();
+			discussionCount.get(i).add(size);
+			if(size > tmpMax)
+			{
+				tmpMax = size;
+			}
 		}
+		max = (((Integer) tmpMax).doubleValue());
 		discussion();
 		for (int i = 0; i < discussionCount.size(); i++) {
 			double nodeValue = 1.0;
 			for (int j = 0; j < discussionCount.get(i).size(); j++) {
-				nodeValue -= (discussionCount.get(i).get(j)) * Math.pow(0.1, j+1.0);
+				nodeValue -= (discussionCount.get(i).get(j)/max) * Math.pow(0.1, j+1.0);
 			}
 			getValues().put(i, nodeValue);
 		}
