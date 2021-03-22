@@ -56,8 +56,10 @@ public class UtilArgs {
                                 case "--problems":
                                     /**
                                      * SE-Cat : the ranking with respect to the Categoriser Semantic
+                                     * R-CCat : the ranking with respect to the Categoriser Semantic generalised to graphs
+                                     * R-Disc : the ranking with respect to the Discussion-Based Semantic
                                      */
-                                    System.out.println("[SE-Cat]");
+                                    System.out.println("[SE-Cat, R-CCat, R-Disc]");
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Unknown argument: " + args[i]);

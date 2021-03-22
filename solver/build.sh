@@ -1,8 +1,7 @@
 #!/bin/bash
 # This script will build the maven project and create a temporary alias
 # Accepts no parameters
-# Usage:        $./build.sh
-#               $solver args
+# Usage:        $./build.sh args
 
 mvn package
 #shopt -s expand_aliases

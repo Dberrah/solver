@@ -1,1 +1,7 @@
-/home/danil/M1/TER/solver/solver/src/main/java/com/bf/solver/App.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/utilities/UtilAF.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/semantics/Categoriser.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/utilities/UtilArgs.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/semantics/DiscussionBased.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/semantics/CycleCategoriser.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/semantics/AbstractSemantic.java
+/home/danil/M1/TER/solvertest/solver/src/main/java/com/bf/solver/App.java

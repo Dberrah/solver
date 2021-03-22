@@ -1,0 +1,1 @@
+java -cp ./target/solver-1.0-SNAPSHOT.jar com.bf.solver.App $*

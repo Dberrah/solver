@@ -1,1 +1,5 @@
-/home/danil/M1/TER/solver/solver/src/test/java/com/bf/solver/AppTest.java
+/home/danil/M1/TER/solvertest/solver/src/test/java/com/bf/semantics/CycleCategoriserTest.java
+/home/danil/M1/TER/solvertest/solver/src/test/java/com/bf/semantics/CategoriserTest.java
+/home/danil/M1/TER/solvertest/solver/src/test/java/com/bf/solver/AppTest.java
+/home/danil/M1/TER/solvertest/solver/src/test/java/com/bf/utilities/UtilArgsTest.java
+/home/danil/M1/TER/solvertest/solver/src/test/java/com/bf/utilities/UtilAFTest.java
