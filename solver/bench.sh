@@ -23,8 +23,8 @@ else
 
         { time java -cp ./target/solver-1.0-SNAPSHOT.jar com.bf.solver.App -p R-CCat -f benchtest.apx -fo apx >stdout 2>stderr; } 2>>benchtime.txt
 
-        benchtest.apx >> graph_history.apx
-        stdout >> results_history.txt
+        cat benchtest.apx >> graph_history.apx
+        cat stdout >> results_history.txt
 
         echo "" >> graph_history.apx
         echo "" >> results_history.txt

@@ -70,7 +70,7 @@ public class DiscussionBased<N> extends AbstractSemantic<N> {
 				}
 			}
 			index++;
-		} while (!done);
+		} while (!done && index < getAF().size());
 	}
 	
 	@Override
