@@ -51,7 +51,12 @@ public class UtilArgs {
                                 throw new IllegalArgumentException("Not a valid argument: " + args[i]);
                             switch (args[i]) {
                                 case "--formats":
-                                    System.out.println("[tgf,apx]");
+                                    /**
+                                     * tgf  : Trivial Graph Format
+                                     * apx  : ASPARTIX Format
+                                     * wapx : Weighted ASPARTIX Format
+                                     */
+                                    System.out.println("[tgf,apx,wapx]");
                                     break;
                                 case "--problems":
                                     /**

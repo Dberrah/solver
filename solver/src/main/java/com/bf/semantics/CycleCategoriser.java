@@ -2,6 +2,7 @@ package com.bf.semantics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Number;
 
 public class CycleCategoriser<N> extends AbstractSemantic<N> {
 
@@ -18,7 +19,7 @@ public class CycleCategoriser<N> extends AbstractSemantic<N> {
 			Double tmpValuation = new Double(1.0);
 			for (int j = 0; j < lastValuation.size(); j++) {
 				if(getAF().get(j).get(i) != null){ // if "j" attacks "i"
-					tmpValuation += ((Integer) getAF().get(j).get(i)).doubleValue() * lastValuation.get(j);
+					tmpValuation += ((Number) getAF().get(j).get(i)).doubleValue() * lastValuation.get(j);
 				}
 			}
 			tmpValuation = 1/tmpValuation;
