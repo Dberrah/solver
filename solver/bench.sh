@@ -1,37 +1,31 @@
 #!/bin/bash
-# This script will build the maven project and create a temporary alias
-# Accepts no parameters
+# This script will create graphs and run our solver to get the execution times
+# Accepts parameters to configure the graph generation
 # Usage:        $./bench.sh
 
-if [[ $# -eq 0 ]];
-then
-    java -cp ./AFGen.jar net.sf.jAFBenchGen.jAFBenchGen.Generator -help
-    echo "numargs is already determined"
+now=$(date +"%Y-%m-%d_%X")
+
+if [[ $# -eq 0 ]]; then
+	java -cp ./AFGen.jar net.sf.jAFBenchGen.jAFBenchGen.Generator -help
+	echo "numargs is already determined"
 else
-    touch benchtime.txt
-    touch graph_history.apx
-    touch results_history.txt
+	mkdir test_${now}
 
-    rm benchtime.txt
-    rm graph_history.apx
-    rm results_history.txt
+	for ((i = 1; 11 - $i; i++)); do
+		nbArgs=$((75 * $i))
 
-    for ((i = 1; 11 - $i; i++)); do
-        nbArgs=$((75 * $i))
+		mkdir test_${now}/tests_${nbArgs}args
 
-        java -cp ./AFGen.jar net.sf.jAFBenchGen.jAFBenchGen.Generator -numargs $nbArgs $* >benchtest.apx
+		for ((j = 0; 10 - $j; j++)); do
 
-        { time java -cp ./target/solver-1.0-SNAPSHOT.jar com.bf.solver.App -p R-CCat -f benchtest.apx -fo apx >stdout 2>stderr; } 2>>benchtime.txt
+			java -cp ./AFGen.jar net.sf.jAFBenchGen.jAFBenchGen.Generator -numargs $nbArgs $* >test_${now}/tests_${nbArgs}args/graph$j.apx
+			{ time java -cp ./target/solver-1.0-SNAPSHOT.jar com.bf.solver.App -p R-CCat -f test_${now}/tests_${nbArgs}args/graph$j.apx -fo apx >test_${now}/tests_${nbArgs}args/results_graph$j.txt 2>stderr; } 2>>test_${now}/benchtime.txt
 
-        cat benchtest.apx >> graph_history.apx
-        cat stdout >> results_history.txt
+		done
 
-        echo "" >> graph_history.apx
-        echo "" >> results_history.txt
-    done
+	done
 
-    rm stdout
-    rm stderr
+	rm stderr
 
-    ./bench.py
+	./bench.py test_${now}/benchtime.txt
 fi
