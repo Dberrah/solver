@@ -3,6 +3,7 @@ package com.bf.solver;
 import com.bf.semantics.Categoriser;
 import com.bf.semantics.CycleCategoriser;
 import com.bf.semantics.DiscussionBased;
+import com.bf.semantics.CycleDiscBased;
 import com.bf.utilities.*;
 
 public class App {
@@ -23,7 +24,7 @@ public class App {
             }
             if (UtilArgs.getArgsList().get(fo_index).contentEquals("wapx")) {
                 switch (UtilArgs.getArgsList().get(p_index)) {
-                    case "SE-Cat":
+                    case "R-Cat":
                         Categoriser<Double> cat = new Categoriser<Double>(UtilAF.parseWeightedAF());
                         cat.resolve();
                         break;
@@ -35,13 +36,17 @@ public class App {
                         DiscussionBased<Double> disc = new DiscussionBased<Double>(UtilAF.parseWeightedAF());
                         disc.resolve();
                         break;
+                    case "R-CDisc":
+                        CycleDiscBased<Double> cDisc = new CycleDiscBased<Double>(UtilAF.parseWeightedAF());
+                        cDisc.resolve();
+                        break;
                     default:
                         System.err.println("There is no such problem !");
                         break;
                 }
             } else {
                 switch (UtilArgs.getArgsList().get(p_index)) {
-                    case "SE-Cat":
+                    case "R-Cat":
                         Categoriser<Integer> cat = new Categoriser<Integer>(UtilAF.parseRankingAF());
                         cat.resolve();
                         break;
@@ -52,6 +57,10 @@ public class App {
                     case "R-Disc":
                         DiscussionBased<Integer> disc = new DiscussionBased<Integer>(UtilAF.parseRankingAF());
                         disc.resolve();
+                        break;
+                    case "R-CDisc":
+                        CycleDiscBased<Integer> cDisc = new CycleDiscBased<Integer>(UtilAF.parseRankingAF());
+                        cDisc.resolve();
                         break;
                     default:
                         System.err.println("There is no such problem !");

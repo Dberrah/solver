@@ -73,7 +73,6 @@ public class DiscussionBased<N> extends AbstractSemantic<N> {
 		} while (!done && index < getAF().size());
 	}
 	
-	@Override
 	public void resolve() {
 		int tmpMax = 0;
 		Double max;
@@ -97,6 +96,7 @@ public class DiscussionBased<N> extends AbstractSemantic<N> {
 			getValues().put(i, nodeValue);
 		}
 		this.sort();
+		System.out.println(discussionCount);
 		System.out.print(this.toString());
 	}
 }

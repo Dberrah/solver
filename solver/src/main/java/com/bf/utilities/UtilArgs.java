@@ -64,7 +64,7 @@ public class UtilArgs {
                                      * R-CCat : the ranking with respect to the Categoriser Semantic generalised to graphs
                                      * R-Disc : the ranking with respect to the Discussion-Based Semantic
                                      */
-                                    System.out.println("[SE-Cat, R-CCat, R-Disc]");
+                                    System.out.println("[R-Cat, R-CCat, R-Disc, R-CDisc]");
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Unknown argument: " + args[i]);
