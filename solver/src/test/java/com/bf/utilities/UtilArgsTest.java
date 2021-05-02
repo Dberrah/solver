@@ -29,12 +29,12 @@ class UtilArgsTest {
 		args2[0] = "-f";
 		args3[0] = "--";
 		args4[0] = "-p";
-		args4[1] = "SE-Cat";
+		args4[1] = "R-Cat";
 		args4[2] = "-f";
 		args4[3] = "solver/src/test/ressources/exemple_1.apx";
 		args4[4] = "-fo";
 		args4[5] = "apx";
-		args[0] = "SE-Cat";
+		args[0] = "R-Cat";
 		args[1] = "solver/src/test/ressources/exemple_1.apx";
 		args[2] = "apx";
 		opts[0] = "-p";

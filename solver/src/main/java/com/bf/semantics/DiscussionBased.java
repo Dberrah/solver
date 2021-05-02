@@ -96,7 +96,6 @@ public class DiscussionBased<N> extends AbstractSemantic<N> {
 			getValues().put(i, nodeValue);
 		}
 		this.sort();
-		System.out.println(discussionCount);
 		System.out.print(this.toString());
 	}
 }
