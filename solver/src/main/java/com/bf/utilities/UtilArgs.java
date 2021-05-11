@@ -60,9 +60,10 @@ public class UtilArgs {
                                     break;
                                 case "--problems":
                                     /**
-                                     * SE-Cat : the ranking with respect to the Categoriser Semantic
-                                     * R-CCat : the ranking with respect to the Categoriser Semantic generalised to graphs
-                                     * R-Disc : the ranking with respect to the Discussion-Based Semantic
+                                     * SE-Cat   : the ranking with respect to the Categoriser Semantic
+                                     * R-CCat   : the ranking with respect to the Categoriser Semantic generalised to graphs
+                                     * R-Disc   : the ranking with respect to the Discussion-Based Semantic
+                                     * R-CDisc  : the ranking with respect to the new Discussion-Based Semantic algorithm
                                      */
                                     System.out.println("[R-Cat, R-CCat, R-Disc, R-CDisc]");
                                     break;

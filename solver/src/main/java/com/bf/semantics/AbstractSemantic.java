@@ -75,6 +75,12 @@ public abstract class AbstractSemantic<T> {
 		return false;
 	}
 
+	/**
+	 * Get the list of arguments that attack the "id" argument
+	 * 
+	 * @param id the id of the node
+	 * @return a list of arguments id
+	 */
 	public List<Integer> getAttacker(int id) {
 		List<Integer> res = new ArrayList<Integer>();
 		for (int i = 0; i < this.AF.size(); i++) {
@@ -109,6 +115,9 @@ public abstract class AbstractSemantic<T> {
 		this.ranking = rank;
 	}
 
+	/**
+	 * Will be implemented in each semantic class to get the result of the ranking
+	 */
 	abstract public void resolve();
 
 }
