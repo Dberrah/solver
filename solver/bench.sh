@@ -1,7 +1,7 @@
 #!/bin/bash
-# This script will create graphs and run our solver to get the execution times
+# This script will create graphs and run our solver to get the execution times of R-CCat
 # Accepts parameters to configure the graph generation
-# Usage:        $./bench.sh
+# Usage:        $./bench.sh args
 
 now=$(date +"%Y-%m-%d_%X")
 
